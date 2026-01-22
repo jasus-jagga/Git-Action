@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build Test
-        run: echo "A test build"
+        run: echo "Hello, ${{ vars.MY_NAME }}"
           
 
   

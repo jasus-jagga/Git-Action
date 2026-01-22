@@ -1,12 +1,40 @@
 name: Hello world
 on: workflow_dispatch
 jobs:
-  hello:
-   runs-on: ubuntu-latest
-   steps:
-     - name: Hello step
-       run: |
-        echo "This first"
-        echo "This is second"
-        echo "This is third"
-       
+  job1:
+    name: Job 1 - Hello
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print from Job 1
+        run: |
+          echo "Hello from Job 1"
+          echo "Doing first task"
+
+  job2:
+    name: Job 2 - Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print from Job 2
+        run: |
+          echo "Hello from Job 2"
+          echo "Doing build task"
+
+  job3:
+    name: Job 3 - Test
+    runs-on: ubuntu-latest
+    needs: job2
+    steps:
+      - name: Print from Job 3
+        run: |
+          echo "Hello from Job 3"
+          echo "Running tests"
+
+  job4:
+    name: Job 4 - Deploy
+    runs-on: ubuntu-latest
+    needs: [job1, job3]
+    steps:
+      - name: Print from Job 4
+        run: |
+          echo "Hello from Job 4"
+          echo "Deploying application"
